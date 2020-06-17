@@ -2,7 +2,9 @@ const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
 const helmet = require('helmet')
-const port = process.env.PORT ||3000 
+const port = process.env.PORT ||3000
+
+const routes = require ('./routers/routes')
 
 const app = express()
 
@@ -11,6 +13,8 @@ app.use(morgan('tiny'))
 app.use(cors())
 app.use(express.json())
 
+app.use(routes)
+app.use(express.static('./public'))
 
 app.listen(port ,(req, res) => {
     console.log(`Listening on Port ${port}`)

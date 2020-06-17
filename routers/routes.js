@@ -1,12 +1,8 @@
 const express = require('express')
 const router = new express.Router()
+const yup = require('yup')
 
-
-router.get('/', (req, res) => {
-    res.json({
-        message: 'Make Short Urls'
-    })
-})
+router.use(express.static('./public'))
 
 // Getting A Short URL
 router.get('/url/:id', (req, res) => {
@@ -22,3 +18,5 @@ router.get('/:id', (req, res) => {
 router.post('/url', (req, res) => {
     
 })
+
+module.exports = router 
