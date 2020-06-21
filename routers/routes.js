@@ -2,7 +2,9 @@ const express = require('express')
 const router = new express.Router()
 const yup = require('yup')
 const schema = require('../model/schema.js')
-const nanoid = require('nanoid')
+const {nanoid} = require('nanoid')
+const url = require('../database/database')
+const urls = require('../database/database')
 
 router.use(express.static('./public'))
 
@@ -18,20 +20,23 @@ router.get('/:id', (req, res) => {
 
 //Create a short url 
 router.post('/url', async (req, res, next) => {
-    const {slug, url} = req.body
+    let {slug, url} = req.body
     try {
         await schema.validate({
             slug,
             url,
         });
         if (!slug){
-            slug = nanoid();
+            slug = nanoid(8);
         }
         slug = slug.toLowerCase();
-        res.json({
-            slug,
+        const secret = nanoid(10).toLowerCase()
+        const newUrl = {
             url,
-        })
+            slug,
+        }
+        const created = await urls.insert(newUrl);
+        res.json(created);
     }catch(error){
         next(error)
     }
