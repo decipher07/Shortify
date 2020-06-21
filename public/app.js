@@ -8,17 +8,17 @@ const app = new Vue ({
     methods: {
         async createUrl() {
             console.log(this.url, this.slug)
-            const res = await fetch ('/url', {
+            const response = await fetch ('/url', {
                 method: 'POST',
                 headers: {
-                    'content-type': 'application/json',
+                    'content-type':'application/json',
                 },
                 body: JSON.stringify({
                     url: this.url,
                     slug: this.slug 
                 })
             })
-            this.created = await res.json();
+            this.created = await response.json();
         }
     }
 })
