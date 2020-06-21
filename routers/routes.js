@@ -14,13 +14,16 @@ router.get('/url/:id', (req, res) => {
 })
 
 // Redirecting a URL 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     const { id: slug} = req.params;
     try {
         const url = await urls.findOne({slug})
         if (url) {
             res.redirect(url.url)
         }
+        res.redirect(`/?error=${slug} not found`)
+    } catch (e){
+        res.redirect(`/?error=${slug} not found`)
     }
 })
 
