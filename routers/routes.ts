@@ -1,10 +1,9 @@
 const express = require('express')
 const router = new express.Router()
 const yup = require('yup')
-const schema = require('../model/schema.js')
+const schema = require('../model/schema.ts')
 const {nanoid} = require('nanoid')
-const url = require('../database/database')
-const urls = require('../database/database')
+const urls = require('../database/database.ts')
 
 router.use(express.static('./public'))
 

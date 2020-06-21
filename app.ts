@@ -3,9 +3,9 @@ const cors = require('cors')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const port = process.env.PORT ||3000
-require('./database/database')
+require('./database/database.ts')
 
-const routes = require ('./routers/routes.js')
+const routes = require ('./routers/routes.ts')
 
 const app = express()
 
