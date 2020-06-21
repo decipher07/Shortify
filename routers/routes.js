@@ -15,7 +15,13 @@ router.get('/url/:id', (req, res) => {
 
 // Redirecting a URL 
 router.get('/:id', (req, res) => {
-
+    const { id: slug} = req.params;
+    try {
+        const url = await urls.findOne({slug})
+        if (url) {
+            res.redirect(url.url)
+        }
+    }
 })
 
 //Create a short url 
@@ -28,6 +34,10 @@ router.post('/url', async (req, res, next) => {
         });
         if (!slug){
             slug = nanoid(8);
+        }else {
+            const existing = await urls.findOne({slug});
+            if (existing)
+                throw new Error('Slug in use')
         }
         slug = slug.toLowerCase();
         const secret = nanoid(10).toLowerCase()
