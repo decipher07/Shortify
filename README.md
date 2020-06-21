@@ -22,10 +22,14 @@ Built Using Languages and Libraries Listed Below
 ```sh
 git clone https://github.com/decipher07/Shortify.git
 ```
-2. node app.ts 
-
-3. Browse localhost:3000/ . 
-
+2. Run The Server
+```sh
+node app.ts 
+```
+3. Browse
+```sh
+Browse localhost:3000/ . 
+```
 <!-- CONTRIBUTING -->
 ## Contributing
 
